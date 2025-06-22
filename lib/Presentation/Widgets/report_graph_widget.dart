@@ -22,15 +22,15 @@ class ReportGraphWidget extends StatelessWidget {
           height: 200,
           child: LineChart(
             LineChartData(
-              gridData: const FlGridData(show: true),
-              titlesData: const FlTitlesData(show: true),
+              gridData: FlGridData(show: true),
+              titlesData: FlTitlesData(show: true),
               borderData: FlBorderData(show: true),
               lineBarsData: [
                 LineChartBarData(
                   spots: data(context.read()),
                   isCurved: true,
                   color: AppColors.primary,
-                  dotData: const FlDotData(show: false),
+                  dotData: FlDotData(show: false),
                 ),
               ],
             ),

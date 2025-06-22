@@ -28,8 +28,8 @@ import '../../Domain/Usecases/Greenhouse/delete_old_data.dart';
 import '../../Domain/Usecases/Greenhouse/edit_greenhouse.dart';
 import '../../Domain/Usecases/Greenhouse/get_greenhouses.dart';
 import '../../Domain/Usecases/Greenhouse/sync_greenhouse_data.dart';
-import '../../Domain/Usecases/Senson Data/get_sensor_data.dart';
-import '../../Domain/Usecases/Senson Data/sync_sensor_data.dart';
+import '../../Domain/Usecases/Sensor Data/get_sensor_data.dart';
+import '../../Domain/Usecases/Sensor Data/sync_sensor_data.dart';
 import '../../Domain/Usecases/Trigger Log/get_trigger_logs.dart';
 import '../../Domain/Usecases/Trigger Log/sync_trigger_logs.dart';
 import '../../Domain/Usecases/User/add_user.dart';
@@ -44,7 +44,7 @@ import '../../Presentation/Bloc/Greenhouse/greenhouse_bloc.dart';
 import '../../Presentation/Bloc/Sensor Data/sensor_data_bloc.dart';
 import '../../Presentation/Bloc/Trigger Log/trigger_log_bloc.dart';
 import '../../Presentation/Bloc/User/user_bloc.dart';
-import '../../core/database/database_helper.dart';
+import '../../Core/Database/database_helper.dart';
 
 
 

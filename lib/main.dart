@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'Common/Theme/app_theme.dart';
-import 'Core/Dependecy Injection/di.dart';
+import 'Core/Dependency Injection/di.dart';
 import 'Core/Navigation/app_router.dart';
 import 'Presentation/Bloc/Auth/auth_bloc.dart';
 import 'Presentation/Bloc/Control Items/control_item_bloc.dart';

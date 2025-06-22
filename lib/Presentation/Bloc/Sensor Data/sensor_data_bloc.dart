@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../Domain/Usecases/Senson Data/get_sensor_data.dart';
-import '../../../Domain/Usecases/Senson Data/sync_sensor_data.dart';
+import '../../../Domain/Usecases/Sensor Data/get_sensor_data.dart';
+import '../../../Domain/Usecases/Sensor Data/sync_sensor_data.dart';
 import 'sensor_data_event.dart';
 import 'sensor_data_state.dart';
 

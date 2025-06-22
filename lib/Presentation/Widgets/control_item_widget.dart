@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../Common/Constants/app_colors.dart';
 import '../../Common/Constants/app_strings.dart';
-import '../../Core/Dependecy Injection/di.dart';
+import '../../Core/Dependency Injection/di.dart';
 import '../../Core/Widgets/custom_radio_option.dart';
 import '../../Domain/Entity/control_item.dart';
 import '../Bloc/Control Items/control_item_bloc.dart';
