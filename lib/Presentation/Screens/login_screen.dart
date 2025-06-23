@@ -11,7 +11,6 @@ import '../Bloc/Auth/auth_bloc.dart';
 import '../Bloc/Auth/auth_event.dart';
 import '../Bloc/Auth/auth_state.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -34,8 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return CustomBackground(
       child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(title: const Text(AppStrings.login)),
+        backgroundColor: AppColors.background, // Set background to AppColors.background
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: BlocListener<AuthBloc, AuthState>(
@@ -53,22 +51,86 @@ class _LoginScreenState extends State<LoginScreen> {
               }
             },
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween, // Push prompt to bottom
               children: [
-                CustomTextField(label: 'Email', controller: _emailController),
-                const SizedBox(height: 16),
-                CustomTextField(label: 'Password', controller: _passwordController),
-                const SizedBox(height: 16),
-                CustomButton(
-                  text: AppStrings.login,
-                  onPressed: () {
-                    context.read<AuthBloc>().add(
-                      LoginEvent(_emailController.text, _passwordController.text),
-                    );
-                  },
+                Expanded(
+                  child: Center( // Keep main content centered
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center, // Vertically center
+                      crossAxisAlignment: CrossAxisAlignment.center, // Horizontally center
+                      children: [
+                        const Text(
+                          'Log in',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        const Text(
+                          'Please login to your account',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontSize: 16,
+                            fontWeight: FontWeight.normal,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+                        CustomTextField(
+                          label: 'Email',
+                          controller: _emailController,
+                          borderColor: AppColors.primary,
+                          prefixIcon: Icons.email, // Icon for Email
+                        ),
+                        const SizedBox(height: 16),
+                        CustomTextField(
+                          label: 'Password',
+                          controller: _passwordController,
+                          borderColor: AppColors.primary,
+                          prefixIcon: Icons.lock, // Icon for Password
+                          isPassword: true, // Enable password obscurity toggle
+                        ),
+                        const SizedBox(height: 16),
+                        CustomButton(
+                          text: AppStrings.login,
+                          onPressed: () {
+                            context.read<AuthBloc>().add(
+                              LoginEvent(_emailController.text, _passwordController.text),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                TextButton(
-                  onPressed: () => context.go('/signup'),
-                  child: const Text('Sign Up', style: TextStyle(color: AppColors.primary)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Don't have account? ",
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => context.go('/signup'),
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

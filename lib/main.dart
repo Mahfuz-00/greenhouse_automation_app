@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'Common/Theme/app_theme.dart';
@@ -17,7 +16,6 @@ import 'Presentation/Bloc/User/user_event.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
   await setupDependencies();
   runApp(const MyApp());
 }
@@ -37,6 +35,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<TriggerLogBloc>()),
       ],
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         title: 'Greenhouse Automation',
         theme: AppTheme.lightTheme,
         routerConfig: AppRouter.router,

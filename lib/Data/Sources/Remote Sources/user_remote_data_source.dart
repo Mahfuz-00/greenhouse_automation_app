@@ -1,38 +1,66 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:greenhouse_automation/Common/Constants/app_urls.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import '../../Models/user_model.dart';
 
+
 class UserRemoteDataSource {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final String _baseUrl = AppURLs.baseUrl;
 
   Future<void> addUser(UserModel user) async {
-    await _firestore.collection('users').doc(user.id).set(user.toJson());
+    final response = await http.post(
+      Uri.parse('$_baseUrl/users'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(user.toJson()),
+    );
+    if (response.statusCode != 201) {
+      throw Exception('Failed to add user: ${response.statusCode}');
+    }
   }
 
   Future<void> updateUser(UserModel user) async {
-    await _firestore.collection('users').doc(user.id).update(user.toJson());
+    final response = await http.put(
+      Uri.parse('$_baseUrl/users/${user.id}'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(user.toJson()),
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Failed to update user: ${response.statusCode}');
+    }
   }
 
   Future<void> deleteUser(String id) async {
-    await _firestore.collection('users').doc(id).delete();
+    final response = await http.delete(Uri.parse('$_baseUrl/users/$id'));
+    if (response.statusCode != 200) {
+      throw Exception('Failed to delete user: ${response.statusCode}');
+    }
   }
 
   Future<UserModel?> loginUser(String email, String password) async {
-    final credential = await _auth.signInWithEmailAndPassword(email: email, password: password);
-    if (credential.user != null) {
-      final doc = await _firestore.collection('users').doc(credential.user!.uid).get();
-      if (doc.exists) {
-        return UserModel.fromJson(doc.data()!);
-      }
+    final response = await http.post(
+      Uri.parse('$_baseUrl/auth/login'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'email': email, 'password': password}),
+    );
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return UserModel.fromJson(jsonData['user']);
     }
     return null;
   }
 
   Future<void> signupUser(UserModel user, String password) async {
-    final credential = await _auth.createUserWithEmailAndPassword(email: user.email, password: password);
-    final userModel = UserModel.fromEntity(user.copyWith(id: credential.user!.uid));
-    await addUser(userModel);
+    final response = await http.post(
+      Uri.parse('$_baseUrl/auth/signup'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        ...user.toJson(),
+        'password': password,
+      }),
+    );
+    if (response.statusCode != 201) {
+      throw Exception('Failed to sign up user: ${response.statusCode}');
+    }
   }
 }
