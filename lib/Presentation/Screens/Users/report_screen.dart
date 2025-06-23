@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../Common/Constants/app_colors.dart';
 import '../../../Common/Constants/app_values.dart';
 import '../../../Core/Widgets/custom_background.dart';
 import '../../../Core/Widgets/custom_button.dart';
@@ -32,7 +33,7 @@ class _ReportScreenState extends State<ReportScreen> {
   Widget build(BuildContext context) {
     return CustomBackground(
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.background,
         appBar: AppBar(title: const Text('Reports')),
         body: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, authState) {

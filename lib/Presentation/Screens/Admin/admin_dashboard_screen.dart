@@ -21,7 +21,7 @@ class AdminDashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBackground(
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.background,
         appBar: AppBar(
           title: const Text(AppStrings.appTitle),
           actions: [

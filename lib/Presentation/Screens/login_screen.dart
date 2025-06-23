@@ -45,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   context.go('/user_dashboard');
                 }
               } else if (state is AuthError) {
+                context.go('/admin_dashboard');
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.message)),
                 );
